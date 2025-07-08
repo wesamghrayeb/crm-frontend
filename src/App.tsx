@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Login from './pages/Login';
 import Appointments from './pages/Appointments';
 import Clients from './pages/Clients';
@@ -7,8 +7,9 @@ import ClientProfile from './pages/ClientProfile';
 import SlotAdmin from './pages/SlotsAdmin';
 import Dashboard from './pages/Dashboard';
 import CalendarBookings from './pages/CalendarBookings';
-import Layout from './components/Layout'; 
+import Layout from './components/Layout';
 import MyProfile from './pages/MyProfile';
+import ManagerCRM from './pages/managerCRM'; // ADD THIS
 
 const isTokenExpired = (token: string | null): boolean => {
   if (!token) return true;
@@ -36,10 +37,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        {/* Login Page (no layout) */}
         <Route path="/login" element={<Login />} />
-
-        {/* Pages with Layout */}
         {token && (
           <Route element={<Layout />}>
             <Route path="/appointments" element={<Appointments />} />
@@ -49,15 +47,13 @@ const App: React.FC = () => {
             <Route path="/admin/slots" element={<SlotAdmin />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/my-profile" element={<MyProfile />} />
+            <Route path="/manager-crm" element={<ManagerCRM />} /> {/* <--- ADD THIS */}
           </Route>
         )}
-
-        {/* Redirect */}
         <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
       </Routes>
     </Router>
   );
 };
-
 
 export default App;

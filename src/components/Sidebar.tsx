@@ -5,7 +5,7 @@ import {
   FiUsers,
   FiLogOut,
   FiClock,
-  FiBarChart2
+  FiBarChart2,
 } from 'react-icons/fi';
 
 interface SidebarProps {
@@ -28,14 +28,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     navigate('/login');
   };
 
+  // Navigation links by role
   const navLinks = (
     <>
+      {/* ---- CLIENT ---- */}
       {client.role === 'client' && (
         <>
-          <Link to="/appointments" onClick={onClose} className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${isActive('/appointments') ? 'text-blue-600 font-semibold bg-blue-50' : ''}`}>
+          <Link
+            to="/appointments"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/appointments') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
             <FiClock /> תורים
           </Link>
-          <Link to="/calendar" onClick={onClose} className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${isActive('/calendar') ? 'text-blue-600 font-semibold bg-blue-50' : ''}`}>
+          <Link
+            to="/calendar"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/calendar') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
             <FiCalendar /> יומן גרפי
           </Link>
           <Link
@@ -50,16 +64,50 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </>
       )}
 
+      {/* ---- ADMIN ---- */}
       {client.role === 'admin' && (
         <>
-          <Link to="/dashboard" onClick={onClose} className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${isActive('/dashboard') ? 'text-blue-600 font-semibold bg-blue-50' : ''}`}>
+          <Link
+            to="/dashboard"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/dashboard') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
             <FiBarChart2 /> לוח ניהול
           </Link>
-          <Link to="/clients" onClick={onClose} className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${isActive('/clients') ? 'text-blue-600 font-semibold bg-blue-50' : ''}`}>
+          <Link
+            to="/clients"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/clients') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
             <FiUsers /> לקוחות
           </Link>
-          <Link to="/admin/slots" onClick={onClose} className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${isActive('/admin/slots') ? 'text-blue-600 font-semibold bg-blue-50' : ''}`}>
+          <Link
+            to="/admin/slots"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/admin/slots') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
             <FiClock /> ניהול תורים
+          </Link>
+        </>
+      )}
+
+      {/* ---- MANAGER ---- */}
+      {client.role === 'manager' && (
+        <>
+          <Link
+            to="/manager-crm"
+            onClick={onClose}
+            className={`flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 transition ${
+              isActive('/manager-crm') ? 'text-blue-600 font-semibold bg-blue-50' : ''
+            }`}
+          >
+            <FiUsers /> ניהול לקוחות
           </Link>
         </>
       )}
@@ -82,12 +130,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       {/* Desktop Sidebar */}
       <aside className="hidden sm:flex flex-col w-64 fixed top-0 left-0 h-screen bg-white border-r p-6 shadow z-40">
         <div className="flex flex-col items-center mb-12">
-          <img src="/crmLogo.png" alt="CRM Logo" className="w-12 h-12 mb-2 rounded-xl shadow" />
+          <img
+            src="/crmLogo.png"
+            alt="CRM Logo"
+            className="w-12 h-12 mb-2 rounded-xl shadow"
+          />
           <h2 className="text-xl font-bold text-blue-700 tracking-wide">TOGETHER</h2>
         </div>
-        <nav className="flex flex-col gap-4 text-gray-700 flex-grow">
-          {navLinks}
-        </nav>
+        <nav className="flex flex-col gap-4 text-gray-700 flex-grow">{navLinks}</nav>
         {logoutButton}
       </aside>
 
@@ -97,7 +147,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div className="flex-1 bg-black bg-opacity-50" onClick={onClose}></div>
           <div className="w-64 bg-white shadow-lg p-6 h-full">
             <div className="flex flex-col items-center mb-8">
-              <img src="/crmLogo.png" alt="CRM Logo" className="w-12 h-12 mb-2 rounded-xl shadow" />
+              <img
+                src="/crmLogo.png"
+                alt="CRM Logo"
+                className="w-12 h-12 mb-2 rounded-xl shadow"
+              />
               <h2 className="text-xl font-bold text-blue-700 tracking-wide">TOGETHER</h2>
             </div>
             <nav className="flex flex-col gap-4 text-gray-700 flex-grow">
